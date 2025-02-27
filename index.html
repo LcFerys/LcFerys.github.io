@@ -1,1 +1,87 @@
-I'am LcFerys
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LcFerys | 视觉摄影师</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      line-height: 1.8;
+      color: #333;
+      background: #f8f9fa;
+    }
+    /* 新增交互效果 */
+    nav a:hover {
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .portfolio-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  </style>
+</head>
+<body>
+  <nav style="background: #1a1a1a; padding: 1.2rem;">
+    <div style="max-width: 1200px; margin: 0 auto; color: #eee;">
+      <h1 style="font-weight: 300; letter-spacing: 1px;">LcFerys</h1>
+      <!-- 导航链接增加悬停效果 -->
+      <ul style="display: flex; gap: 2.5rem; margin-top: 0.8rem;">
+        <li><a href="#about" style="color: #eee; text-decoration: none; font-size: 1.1rem;">关于</a></li>
+        <li><a href="#portfolio" style="color: white; text-decoration: none;">作品集</a></li>
+        <li><a href="#contact" style="color: white; text-decoration: none;">联系</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 主体内容 -->
+  <main style="margin-top: 100px; padding: 2rem 1.5rem;">
+    <section id="about">
+      <h2 style="font-size: 2.2rem; color: #2c3e50; margin-bottom: 1.5rem;">视觉创作者</h2>
+      <p style="font-size: 1.1rem; max-width: 800px; color: #555;">拥有8年商业摄影经验，擅长人像摄影与动态影像创作...</p>
+    </section>
+
+    <!-- 作品集说明文字优化 -->
+    <section id="portfolio" style="margin: 5rem 0;">
+      <h2 style="font-size: 1.8rem; margin-bottom: 2.5rem; color: #2c3e50;">视觉叙事</h2>
+      <div class="portfolio-grid">
+        <figure>
+          <img src="work1.jpg" alt="婚礼摄影" 
+               style="width: 100%; height: 320px; object-fit: cover; border-radius: 4px;">
+          <figcaption style="text-align: center; margin-top: 0.8rem; color: #666;">婚礼纪实 · 2024</figcaption>
+        </figure>
+        <!-- 视频作品 -->
+        <div style="position: relative; padding-top: 56.25%;">
+          <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            <source src="showreel.mp4" type="video/mp4">
+          </video>
+        </div>
+        <!-- 添加更多作品... -->
+      </div>
+    </section>
+
+    <!-- 联系表单 -->
+    <section id="contact" style="background: #fff; padding: 2.5rem; border-radius: 12px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+      <h2 style="font-size: 1.8rem; margin-bottom: 1.8rem; color: #2c3e50;">合作联系</h2>
+      <form style="max-width: 600px;">
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">姓名：</label>
+          <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 6px;">
+        </div>
+        <!-- 更新按钮交互效果 -->
+        <button type="submit" 
+                style="background: #3498db; color: white; padding: 0.8rem 2.5rem; 
+                       border-radius: 25px; cursor: pointer; transition: background 0.3s ease;"
+                onmouseover="this.style.background='#2980b9'" 
+                onmouseout="this.style.background='#3498db'">
+          发送讯息
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <footer style="background: #1a1a1a; color: #ddd; padding: 1.5rem;">
+    <p>© 2025 LcFerys 保留所有权利</p>
+  </footer>
+</body>
+</html>
