@@ -1,0 +1,151 @@
+/* 新增主色调 */
+:root {
+  /* 深蓝 */
+  --primary-color: #2c3e50;
+  /* 科技蓝 */
+  --secondary-color: #3498db;
+  /* 强调红 */
+  --accent-color: #e74c3c;
+}
+
+/* 增强基础排版 */
+.resume-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Roboto', 'PingFang SC', sans-serif;
+}
+
+/* 标题样式增强 */
+h1,
+h2,
+h3 {
+  color: var(--primary-color);
+  font-family: 'Lato', 'Microsoft YaHei', sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+  border-bottom: 3px solid var(--secondary-color);
+  padding-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin: 2rem 0 1.5rem;
+}
+
+/* 头像尺寸控制 */
+.avatar-frame {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 新增基础文字样式 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&display=swap');
+
+body {
+  font-family: 'Noto Sans SC', 'Roboto', sans-serif;
+  color: #333;
+  /* 新增强制字体渲染 */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 修复时间线模块显示 */
+.timeline-content {
+  opacity: 1 !important;
+  color: #444 !important;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* ======= 时间线样式迁移 ======= */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--secondary-color);
+}
+
+.timeline-item {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* 保留原有时间线动画效果 */
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ====== 卡片式经历布局 ====== */
+.experience-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.experience-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.card-header i {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  background: rgba(52, 152, 219, 0.1);
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
+.duration {
+  margin-left: auto;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* 新增公司logo样式 */
+.company-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: rgba(52, 152, 219, 0.1);
+  padding: 4px;
+}
