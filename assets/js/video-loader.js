@@ -1,69 +1,48 @@
-
-const SAFETY_OPTIONS = {
-  maxRetries: 3,
-  timeout: 10000,
-};
-
-function verifyVideoSource(src) {
-  return SAFETY_OPTIONS.allowedHosts.some(host => src.includes(host));
+function verifyVideoSource(sources) {
+  if (!Array.isArray(sources)) {
+    console.error('视频源必须为数组，当前为:', typeof sources);
+    return false;
+  }
+  return sources.some(source => 
+    source.includes('.mp4') || source.includes('.webm')
+  );
 }
 
-async function loadFullVideo() {
-  const videos = document.querySelectorAll('video[data-src]');
+function loadFullVideo(videoElement) {
+  try {
+    const rawSources = videoElement.dataset.videoSources;
+    const sources = rawSources ? JSON.parse(rawSources) : [];
+    console.log('加载视频源:', sources);
 
-  for (const video of videos) {
-    try {
-      if (!verifyVideoSource(video.dataset.src)) {
-        console.warn('非法视频源:', video.dataset.src);
-        continue;
-      }
-
-      const source = video.querySelector('source');
-      const realSrc = `${video.dataset.src}?${Date.now()}`; // 防止缓存投毒
-
-      // 带超时和重试的加载
-      await Promise.race([
-        new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('加载超时')), SAFETY_OPTIONS.timeout)
-        ),
-        (async () => {
-          for (let i = 0; i < SAFETY_OPTIONS.maxRetries; i++) {
-            try {
-              source.src = `${realSrc}#t=0.1`;
-              video.load();
-              await video.play();
-              return;
-            } catch (error) {
-              if (i === SAFETY_OPTIONS.maxRetries - 1) throw error;
-              await new Promise(res => setTimeout(res, 2000 * (i + 1)));
-            }
-          }
-        })()
-      ]);
-
-      // 添加加载状态监听
-      video.addEventListener('loadeddata', () => {
-        // 当视频元数据加载完成后标记加载状态
-        // data-loaded属性用于CSS选择器控制界面样式
-        // 示例CSS用法: video[data-loaded="true"] { opacity: 1 }
-        video.setAttribute('data-loaded', 'true');
+    if (verifyVideoSource(sources)) {
+      // 替换视频源或加载逻辑
+      const sourceElements = sources.map(src => {
+        const source = document.createElement('source');
+        source.src = src;
+        source.type = `video/${src.split('.').pop()}`; // 例如 video/mp4
+        return source;
       });
-
-    } catch (error) {
-      console.error('视频加载失败:', error);
-      video.parentElement.innerHTML = `<div class="video-error">视频加载失败，请<a href="${video.dataset.src}" rel="noopener noreferrer">点击下载</a></div>`;
+      videoElement.innerHTML = ''; // 清空现有子元素
+      sourceElements.forEach(source => videoElement.appendChild(source));
+      videoElement.load(); // 重新加载视频
+    } else {
+      console.warn('无有效视频源，元素ID:', videoElement.id);
     }
+  } catch (e) {
+    console.error('加载视频失败:', e);
   }
 }
 
-// 使用 Intersection Observer 替代 scroll 事件
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      loadFullVideo();
-      observer.unobserve(entry.target);
-    }
-  });
-});
+// IntersectionObserver 初始化
+document.querySelectorAll('.lazy-video').forEach(video => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        loadFullVideo(entry.target);
+        observer.unobserve(entry.target); // 加载后停止观察
+      }
+    });
+  }, { rootMargin: '200px' }); // 提前200px触发加载
 
-document.querySelectorAll('video').forEach(video => observer.observe(video));
+  observer.observe(video);
+});
