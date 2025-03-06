@@ -11,10 +11,7 @@
   <!-- 新增图标库 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <!-- 新增海外CDN回源 -->
-  <script>
-    const CDN_HOST = 'https://cdn.jsdelivr.net/gh/LcFerys/LcFerys.github.io@latest';
-    window.resourceBasePath = location.host.includes('github.io') ? CDN_HOST : '';
-  </script>
+
 </head>
 
 <body>
@@ -72,8 +69,7 @@
       <div class="portfolio-grid">
         <figure class="portfolio-item">
           <video width="640" height="360" controls preload="metadata" poster="assets/images/logo/24fps.jpg"
-            data-src="https://github.com/LcFerys/LcFerys.github.io/raw/refs/heads/main/assets/videos/by-health/20230919_By-Health_Plot8_V7.mp4"
-            type="video/mp4">
+            data-src="/raw/refs/heads/main/assets/videos/by-health/20230919_By-Health_Plot8_V7.mp4" type="video/mp4">
             <p>您的浏览器不支持 video 标签，或者无法播放此视频格式。</p>
           </video>
         </figure>
@@ -81,7 +77,7 @@
         <figure class="portfolio-item">
           <video width="640" height="360" controls preload="auto" poster="assets/images/logo/24fps.jpg">
             <source
-              src="https://github.com/LcFerys/LcFerys.github.io/raw/refs/heads/main/assets/videos/mercedes-benz/Mercedes-AMG-Product-Experience-Highlights.mov"
+              src="/raw/refs/heads/main/assets/videos/mercedes-benz/Mercedes-AMG-Product-Experience-Highlights.mov"
               type="video/mp4">
             <p>您的浏览器不支持 video 标签，或者无法播放此视频格式。</p>
           </video>
@@ -89,10 +85,16 @@
       </div>
     </section>
 
+    <a target="_blank" href=" http://www.freecdn.vip/?zzwz " title="免费云加速（FreeCDN），为您免费提供网站加速和网站防御（DDOS、CC攻击）"
+      alt="免费云加速（FreeCDN），为您免费提供网站加速和网站防御（DDOS、CC攻击）">本站由免费云加速（FreeCDN）提供网站加速和攻击防御服务</a>
     </footer>
 
     <!-- 添加视频加载器脚本 -->
     <script src="assets/js/video-loader.js"></script>
+    <script>
+      const CDN_HOST = 'https://cdn.jsdelivr.net/gh/LcFerys/LcFerys.github.io@latest';
+      window.resourceBasePath = location.host.includes('github.io', '127.0.0.1', 'localhost') ? CDN_HOST : '';
+    </script>
 </body>
 
 </html>
