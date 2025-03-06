@@ -1,48 +1,22 @@
-function verifyVideoSource(sources) {
-  if (!Array.isArray(sources)) {
-    console.error('视频源必须为数组，当前为:', typeof sources);
-    return false;
-  }
-  return sources.some(source => 
-    source.includes('.mp4') || source.includes('.webm')
-  );
-}
+function loadFullVideo() {
+  const videos = document.querySelectorAll('video[data-src]');
+  videos.forEach(video => {
+    const src = video.dataset.src;
+    // 添加时间锚点避免Safari的Range请求问题
+    video.querySelector('source').src = `${src}#t=0.1`;
+    video.load();
 
-function loadFullVideo(videoElement) {
-  try {
-    const rawSources = videoElement.dataset.videoSources;
-    const sources = rawSources ? JSON.parse(rawSources) : [];
-    console.log('加载视频源:', sources);
-
-    if (verifyVideoSource(sources)) {
-      // 替换视频源或加载逻辑
-      const sourceElements = sources.map(src => {
-        const source = document.createElement('source');
-        source.src = src;
-        source.type = `video/${src.split('.').pop()}`; // 例如 video/mp4
-        return source;
-      });
-      videoElement.innerHTML = ''; // 清空现有子元素
-      sourceElements.forEach(source => videoElement.appendChild(source));
-      videoElement.load(); // 重新加载视频
-    } else {
-      console.warn('无有效视频源，元素ID:', videoElement.id);
-    }
-  } catch (e) {
-    console.error('加载视频失败:', e);
-  }
-}
-
-// IntersectionObserver 初始化
-document.querySelectorAll('.lazy-video').forEach(video => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        loadFullVideo(entry.target);
-        observer.unobserve(entry.target); // 加载后停止观察
-      }
+    // 添加加载状态监听
+    video.addEventListener('loadeddata', () => {
+      video.setAttribute('data-loaded', 'true');
     });
-  }, { rootMargin: '200px' }); // 提前200px触发加载
 
-  observer.observe(video);
-});
+    // 添加错误处理
+    video.addEventListener('error', (e) => {
+      console.error('视频加载失败:', e.target.error);
+    });
+  });
+}
+
+// 改为滚动到可视区域后加载
+window.addEventListener('scroll', loadFullVideo, { once: true, passive: true });
