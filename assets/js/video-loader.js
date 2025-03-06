@@ -2,7 +2,7 @@ function loadFullVideo() {
   const videos = document.querySelectorAll('video[data-src]');
   videos.forEach(video => {
     // 修改为绝对路径（添加仓库名前缀）
-    const repoName = 'https://cdn.jsdelivr.net/gh/LcFerys/LcFerys.github.io@latest'; // 根据实际仓库名修改
+    const repoName = 'https://bgithub.xyz/LcFerys/LcFerys.github.i'; // 根据实际仓库名修改
     const src = `${repoName}/${video.dataset.src}`;
     console.log('src:', src);
     
