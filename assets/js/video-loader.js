@@ -2,19 +2,19 @@
 function initLazyLoad() {
   // 配置多个仓库基地址（可扩展）
   const repoBases = [
-    'https://bgithub.xyz/LcFerys/LcFerys.github.io',
-    'https://kkgithub.com/LcFerys/LcFerys.github.io',
-    'https://gitclone.com/LcFerys/LcFerys.github.io',
-    'https://git.homegu.com/LcFerys/LcFerys.github.io',
-    'https://github.hscsec.cn/LcFerys/LcFerys.github.io',
-    'https://github.ur1.fun/LcFerys/LcFerys.github.io'
+    'https://bgithub.xyz',
+    'https://kkgithub.com',
+    'https://gitclone.como',
+    'https://git.homegu.com',
+    'https://github.hscsec.cn',
+    'https://github.ur1.fun'
   ];
 
   // 轮询计数器
   let repoIndex = 0;
 
   const getNextRepoBase = () => {
-    const base = repoBases[repoIndex];
+    const base = `${repoBases[repoIndex]}/LcFerys/LcFerys.github.io`;
     repoIndex = (repoIndex + 1) % repoBases.length;
     return base;
   };
@@ -102,7 +102,7 @@ function initLazyLoad() {
     });
   }, {
     rootMargin: '200px',
-    threshold: 0.2
+    threshold: 0.1
   });
 
   // 初始化观察

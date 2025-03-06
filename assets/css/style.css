@@ -216,6 +216,7 @@
 /* 保留原有移动端样式 */
 @media (max-width: 768px) {
   .nav-links {
+    flex-direction: column;
     background: rgba(255, 255, 255, 0.95);
   }
 }
@@ -303,12 +304,14 @@
   box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
 }
 
-/* 新增滚动效果 */
+/* 导航栏滚动效果 */
 .main-nav.scrolled {
   background: rgba(26, 26, 26, 0.98);
-  padding: 0.8rem 0;
   backdrop-filter: blur(10px);
 }
+
+/* 卡片悬停追踪 */
+/* card.style.setProperty('--mouse-x', `${x}px`); */
 
 /* 增强文字对比度 */
 .nav-link {
