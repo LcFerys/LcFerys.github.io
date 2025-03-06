@@ -64,7 +64,8 @@
       </div>
     </section>
 
-    <!-- 修改视频标签部分 -->
+    <!-- 视频标签部分 -->
+    <!-- 修改后的HTML（去除了repoBase路径） -->
     <section id="portfolio" class="section">
       <div class="portfolio-grid">
         <figure class="portfolio-item">
@@ -73,12 +74,11 @@
             <p>您的浏览器不支持 video 标签，或者无法播放此视频格式。</p>
           </video>
         </figure>
-        <!-- 其他作品项保持不变 -->
+
         <figure class="portfolio-item">
-          <video width="640" height="360" controls preload="auto" poster="assets/images/logo/24fps.jpg">
-            <source
-              src="/raw/refs/heads/main/assets/videos/mercedes-benz/Mercedes-AMG-Product-Experience-Highlights.mov"
-              type="video/mp4">
+          <video width="640" height="360" controls preload="auto" poster="assets/images/logo/24fps.jpg"
+            data-src="/raw/refs/heads/main/assets/videos/mercedes-benz/Mercedes-AMG-Product-Experience-Highlights.mov"
+            type="video/mp4">
             <p>您的浏览器不支持 video 标签，或者无法播放此视频格式。</p>
           </video>
         </figure>
